@@ -1,0 +1,1598 @@
+mysql> CREATE DATABASE retail_store_db;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> Use retail_store_db;
+Database changed
+mysql> CREATE TABLE sales (sale_id INT PRIMARY KEY, customer_name VARCHAR(50), gender VARCHAR(10), age INT, city VARCHAR(30), category VARCHAR(30), product_name VARCHAR(50), payment_mode VARCHAR(20), quantity INT, quantity INT, price DECIMAL(10,2), rating DECIMAL(2,1), order_date Date);
+ERROR 1060 (42S21): Duplicate column name 'quantity'
+mysql> CREATE TABLE sales (
+    ->     sale_id INT PRIMARY KEY,
+    ->     customer_name VARCHAR(50),
+    ->     gender VARCHAR(10),
+    ->     age INT,
+    ->     city VARCHAR(30),
+    ->     category VARCHAR(30),
+    ->     product_name VARCHAR(50),
+    ->     payment_mode VARCHAR(20),
+    ->     quantity INT,
+    ->     price DECIMAL(10,2),
+    ->     rating DECIMAL(2,1),
+    ->     order_date DATE
+    -> );
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> SHOW TABLES;
++---------------------------+
+| Tables_in_retail_store_db |
++---------------------------+
+| sales                     |
++---------------------------+
+1 row in set (0.04 sec)
+
+mysql> DESCRIBE sales;
++---------------+---------------+------+-----+---------+-------+
+| Field         | Type          | Null | Key | Default | Extra |
++---------------+---------------+------+-----+---------+-------+
+| sale_id       | int           | NO   | PRI | NULL    |       |
+| customer_name | varchar(50)   | YES  |     | NULL    |       |
+| gender        | varchar(10)   | YES  |     | NULL    |       |
+| age           | int           | YES  |     | NULL    |       |
+| city          | varchar(30)   | YES  |     | NULL    |       |
+| category      | varchar(30)   | YES  |     | NULL    |       |
+| product_name  | varchar(50)   | YES  |     | NULL    |       |
+| payment_mode  | varchar(20)   | YES  |     | NULL    |       |
+| quantity      | int           | YES  |     | NULL    |       |
+| price         | decimal(10,2) | YES  |     | NULL    |       |
+| rating        | decimal(2,1)  | YES  |     | NULL    |       |
+| order_date    | date          | YES  |     | NULL    |       |
++---------------+---------------+------+-----+---------+-------+
+12 rows in set (0.01 sec)
+
+mysql> USE RETAIL_STORE_DB;
+Database changed
+mysql> INSERT INTO SALES VALUES
+    -> (1,'Akash','Male',24,'Pune','Electronics','Laptop','UPI',1,55000,4.8,'2026-01-10'),(2,'Rahul','Male',26,'Mumbai','Fashion','Shirt','Card',2,2500,4.2,'2026-01-11'),(3,'Sneha','Female',23,'Delhi','Beauty','Lipstick','UPI',3,1500,4.5,'2026-01-12'),(4,'Priya','Female',25,'Pune','Electronics','Mobile','Card',1,25000,4.7,'2026-01-13'),(5,'Aman','Male',28,'Indore','Sports','Cricket Bat','Cash',1,3000,4.1,'2026-01-14'),(6,'Rohit','Male',27,'Mumbai','Electronics','Headphones','UPI',2,4000,4.3,'2026-01-15'),(7,'Riya','Female',24,'Delhi','Fashion','Jeans','Card',1,2200,4.4,'2026-01-16'),(8,'Karan','Male',29,'Pune','Sports','Football','Cash',2,1800,4.0,'2026-01-17'),(9,'Neha','Female',22,'Bhopal','Beauty','Face Wash','UPI',4,800,4.6,'2026-01-18'),(10,'Vikas','Male',31,'Jaipur','Electronics','Tablet','Card',1,18000,4.5,'2026-01-19'),(11,'Pooja','Female',27,'Pune','Fashion','Kurti','UPI',2,1700,4.3,'2026-01-20'),(12,'Arjun','Male',30,'Delhi','Electronics','Smart Watch','Card',1,9000,4.6,'2026-01-21'),(13,'Anjali','Female',26,'Mumbai','Beauty','Perfume','Cash',1,3500,4.2,'2026-01-22'),(14,'Yash','Male',25,'Indore','Sports','Badminton Kit','UPI',1,2800,4.4,'2026-01-23'),(15,'Meera','Female',28,'Pune','Electronics','Camera','Card',1,45000,4.9,'2026-01-24'),(16,'Sahil','Male',24,'Bhopal','Fashion','Jacket','UPI',1,3200,4.1,'2026-01-25'),(17,'Nikita','Female',29,'Jaipur','Beauty','Moisturizer','Card',2,1200,4.7,'2026-01-26'),(18,'Harsh','Male',32,'Delhi','Sports','Gym Gloves','Cash',3,900,4.0,'2026-01-27'),(19,'Simran','Female',23,'Mumbai','Electronics','Earbuds','UPI',2,2500,4.5,'2026-01-28'),(20,'Deepak','Male',27,'Pune','Fashion','T-Shirt','Card',3,1800,4.2,'2026-01-29');
+Query OK, 20 rows affected (0.02 sec)
+Records: 20  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM SALES;
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name  | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+|       1 | Akash         | Male   |   24 | Pune   | Electronics | Laptop        | UPI          |        1 | 55000.00 |    4.8 | 2026-01-10 |
+|       2 | Rahul         | Male   |   26 | Mumbai | Fashion     | Shirt         | Card         |        2 |  2500.00 |    4.2 | 2026-01-11 |
+|       3 | Sneha         | Female |   23 | Delhi  | Beauty      | Lipstick      | UPI          |        3 |  1500.00 |    4.5 | 2026-01-12 |
+|       4 | Priya         | Female |   25 | Pune   | Electronics | Mobile        | Card         |        1 | 25000.00 |    4.7 | 2026-01-13 |
+|       5 | Aman          | Male   |   28 | Indore | Sports      | Cricket Bat   | Cash         |        1 |  3000.00 |    4.1 | 2026-01-14 |
+|       6 | Rohit         | Male   |   27 | Mumbai | Electronics | Headphones    | UPI          |        2 |  4000.00 |    4.3 | 2026-01-15 |
+|       7 | Riya          | Female |   24 | Delhi  | Fashion     | Jeans         | Card         |        1 |  2200.00 |    4.4 | 2026-01-16 |
+|       8 | Karan         | Male   |   29 | Pune   | Sports      | Football      | Cash         |        2 |  1800.00 |    4.0 | 2026-01-17 |
+|       9 | Neha          | Female |   22 | Bhopal | Beauty      | Face Wash     | UPI          |        4 |   800.00 |    4.6 | 2026-01-18 |
+|      10 | Vikas         | Male   |   31 | Jaipur | Electronics | Tablet        | Card         |        1 | 18000.00 |    4.5 | 2026-01-19 |
+|      11 | Pooja         | Female |   27 | Pune   | Fashion     | Kurti         | UPI          |        2 |  1700.00 |    4.3 | 2026-01-20 |
+|      12 | Arjun         | Male   |   30 | Delhi  | Electronics | Smart Watch   | Card         |        1 |  9000.00 |    4.6 | 2026-01-21 |
+|      13 | Anjali        | Female |   26 | Mumbai | Beauty      | Perfume       | Cash         |        1 |  3500.00 |    4.2 | 2026-01-22 |
+|      14 | Yash          | Male   |   25 | Indore | Sports      | Badminton Kit | UPI          |        1 |  2800.00 |    4.4 | 2026-01-23 |
+|      15 | Meera         | Female |   28 | Pune   | Electronics | Camera        | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
+|      16 | Sahil         | Male   |   24 | Bhopal | Fashion     | Jacket        | UPI          |        1 |  3200.00 |    4.1 | 2026-01-25 |
+|      17 | Nikita        | Female |   29 | Jaipur | Beauty      | Moisturizer   | Card         |        2 |  1200.00 |    4.7 | 2026-01-26 |
+|      18 | Harsh         | Male   |   32 | Delhi  | Sports      | Gym Gloves    | Cash         |        3 |   900.00 |    4.0 | 2026-01-27 |
+|      19 | Simran        | Female |   23 | Mumbai | Electronics | Earbuds       | UPI          |        2 |  2500.00 |    4.5 | 2026-01-28 |
+|      20 | Deepak        | Male   |   27 | Pune   | Fashion     | T-Shirt       | Card         |        3 |  1800.00 |    4.2 | 2026-01-29 |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT CUSTOMER_NAME FROM SALES;
++---------------+
+| CUSTOMER_NAME |
++---------------+
+| Akash         |
+| Rahul         |
+| Sneha         |
+| Priya         |
+| Aman          |
+| Rohit         |
+| Riya          |
+| Karan         |
+| Neha          |
+| Vikas         |
+| Pooja         |
+| Arjun         |
+| Anjali        |
+| Yash          |
+| Meera         |
+| Sahil         |
+| Nikita        |
+| Harsh         |
+| Simran        |
+| Deepak        |
++---------------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT CUSTOMER_NAME, CITY FROM SALES;
++---------------+--------+
+| CUSTOMER_NAME | CITY   |
++---------------+--------+
+| Akash         | Pune   |
+| Rahul         | Mumbai |
+| Sneha         | Delhi  |
+| Priya         | Pune   |
+| Aman          | Indore |
+| Rohit         | Mumbai |
+| Riya          | Delhi  |
+| Karan         | Pune   |
+| Neha          | Bhopal |
+| Vikas         | Jaipur |
+| Pooja         | Pune   |
+| Arjun         | Delhi  |
+| Anjali        | Mumbai |
+| Yash          | Indore |
+| Meera         | Pune   |
+| Sahil         | Bhopal |
+| Nikita        | Jaipur |
+| Harsh         | Delhi  |
+| Simran        | Mumbai |
+| Deepak        | Pune   |
++---------------+--------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT PRODUCT_NAME, PRICE FROM SALES;
++---------------+----------+
+| PRODUCT_NAME  | PRICE    |
++---------------+----------+
+| Laptop        | 55000.00 |
+| Shirt         |  2500.00 |
+| Lipstick      |  1500.00 |
+| Mobile        | 25000.00 |
+| Cricket Bat   |  3000.00 |
+| Headphones    |  4000.00 |
+| Jeans         |  2200.00 |
+| Football      |  1800.00 |
+| Face Wash     |   800.00 |
+| Tablet        | 18000.00 |
+| Kurti         |  1700.00 |
+| Smart Watch   |  9000.00 |
+| Perfume       |  3500.00 |
+| Badminton Kit |  2800.00 |
+| Camera        | 45000.00 |
+| Jacket        |  3200.00 |
+| Moisturizer   |  1200.00 |
+| Gym Gloves    |   900.00 |
+| Earbuds       |  2500.00 |
+| T-Shirt       |  1800.00 |
++---------------+----------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT CITY FROM SALES;
++--------+
+| CITY   |
++--------+
+| Pune   |
+| Mumbai |
+| Delhi  |
+| Indore |
+| Bhopal |
+| Jaipur |
++--------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT CATEGORY FROM SALES;
++-------------+
+| CATEGORY    |
++-------------+
+| Electronics |
+| Fashion     |
+| Beauty      |
+| Sports      |
++-------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT PAYMENT_MODE FROM SALES;
++--------------+
+| PAYMENT_MODE |
++--------------+
+| UPI          |
+| Card         |
+| Cash         |
++--------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SALES WHERE GENDER = 'MALE';
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name  | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+|       1 | Akash         | Male   |   24 | Pune   | Electronics | Laptop        | UPI          |        1 | 55000.00 |    4.8 | 2026-01-10 |
+|       2 | Rahul         | Male   |   26 | Mumbai | Fashion     | Shirt         | Card         |        2 |  2500.00 |    4.2 | 2026-01-11 |
+|       5 | Aman          | Male   |   28 | Indore | Sports      | Cricket Bat   | Cash         |        1 |  3000.00 |    4.1 | 2026-01-14 |
+|       6 | Rohit         | Male   |   27 | Mumbai | Electronics | Headphones    | UPI          |        2 |  4000.00 |    4.3 | 2026-01-15 |
+|       8 | Karan         | Male   |   29 | Pune   | Sports      | Football      | Cash         |        2 |  1800.00 |    4.0 | 2026-01-17 |
+|      10 | Vikas         | Male   |   31 | Jaipur | Electronics | Tablet        | Card         |        1 | 18000.00 |    4.5 | 2026-01-19 |
+|      12 | Arjun         | Male   |   30 | Delhi  | Electronics | Smart Watch   | Card         |        1 |  9000.00 |    4.6 | 2026-01-21 |
+|      14 | Yash          | Male   |   25 | Indore | Sports      | Badminton Kit | UPI          |        1 |  2800.00 |    4.4 | 2026-01-23 |
+|      16 | Sahil         | Male   |   24 | Bhopal | Fashion     | Jacket        | UPI          |        1 |  3200.00 |    4.1 | 2026-01-25 |
+|      18 | Harsh         | Male   |   32 | Delhi  | Sports      | Gym Gloves    | Cash         |        3 |   900.00 |    4.0 | 2026-01-27 |
+|      20 | Deepak        | Male   |   27 | Pune   | Fashion     | T-Shirt       | Card         |        3 |  1800.00 |    4.2 | 2026-01-29 |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+11 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SALES WHERE GENDER = 'FEMALE';
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+|       3 | Sneha         | Female |   23 | Delhi  | Beauty      | Lipstick     | UPI          |        3 |  1500.00 |    4.5 | 2026-01-12 |
+|       4 | Priya         | Female |   25 | Pune   | Electronics | Mobile       | Card         |        1 | 25000.00 |    4.7 | 2026-01-13 |
+|       7 | Riya          | Female |   24 | Delhi  | Fashion     | Jeans        | Card         |        1 |  2200.00 |    4.4 | 2026-01-16 |
+|       9 | Neha          | Female |   22 | Bhopal | Beauty      | Face Wash    | UPI          |        4 |   800.00 |    4.6 | 2026-01-18 |
+|      11 | Pooja         | Female |   27 | Pune   | Fashion     | Kurti        | UPI          |        2 |  1700.00 |    4.3 | 2026-01-20 |
+|      13 | Anjali        | Female |   26 | Mumbai | Beauty      | Perfume      | Cash         |        1 |  3500.00 |    4.2 | 2026-01-22 |
+|      15 | Meera         | Female |   28 | Pune   | Electronics | Camera       | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
+|      17 | Nikita        | Female |   29 | Jaipur | Beauty      | Moisturizer  | Card         |        2 |  1200.00 |    4.7 | 2026-01-26 |
+|      19 | Simran        | Female |   23 | Mumbai | Electronics | Earbuds      | UPI          |        2 |  2500.00 |    4.5 | 2026-01-28 |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT CUSTOMER_NAME, RATING FROM SALES;
++---------------+--------+
+| CUSTOMER_NAME | RATING |
++---------------+--------+
+| Akash         |    4.8 |
+| Rahul         |    4.2 |
+| Sneha         |    4.5 |
+| Priya         |    4.7 |
+| Aman          |    4.1 |
+| Rohit         |    4.3 |
+| Riya          |    4.4 |
+| Karan         |    4.0 |
+| Neha          |    4.6 |
+| Vikas         |    4.5 |
+| Pooja         |    4.3 |
+| Arjun         |    4.6 |
+| Anjali        |    4.2 |
+| Yash          |    4.4 |
+| Meera         |    4.9 |
+| Sahil         |    4.1 |
+| Nikita        |    4.7 |
+| Harsh         |    4.0 |
+| Simran        |    4.5 |
+| Deepak        |    4.2 |
++---------------+--------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SALES WHERE CITY = 'PUNE';
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city | category    | product_name | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+|       1 | Akash         | Male   |   24 | Pune | Electronics | Laptop       | UPI          |        1 | 55000.00 |    4.8 | 2026-01-10 |
+|       4 | Priya         | Female |   25 | Pune | Electronics | Mobile       | Card         |        1 | 25000.00 |    4.7 | 2026-01-13 |
+|       8 | Karan         | Male   |   29 | Pune | Sports      | Football     | Cash         |        2 |  1800.00 |    4.0 | 2026-01-17 |
+|      11 | Pooja         | Female |   27 | Pune | Fashion     | Kurti        | UPI          |        2 |  1700.00 |    4.3 | 2026-01-20 |
+|      15 | Meera         | Female |   28 | Pune | Electronics | Camera       | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
+|      20 | Deepak        | Male   |   27 | Pune | Fashion     | T-Shirt      | Card         |        3 |  1800.00 |    4.2 | 2026-01-29 |
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SALES WHERE CITY = 'MUMBAI';
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+---------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name | payment_mode | quantity | price   | rating | order_date |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+---------+--------+------------+
+|       2 | Rahul         | Male   |   26 | Mumbai | Fashion     | Shirt        | Card         |        2 | 2500.00 |    4.2 | 2026-01-11 |
+|       6 | Rohit         | Male   |   27 | Mumbai | Electronics | Headphones   | UPI          |        2 | 4000.00 |    4.3 | 2026-01-15 |
+|      13 | Anjali        | Female |   26 | Mumbai | Beauty      | Perfume      | Cash         |        1 | 3500.00 |    4.2 | 2026-01-22 |
+|      19 | Simran        | Female |   23 | Mumbai | Electronics | Earbuds      | UPI          |        2 | 2500.00 |    4.5 | 2026-01-28 |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+---------+--------+------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SALES WHERE CATEGORY = 'ELECTRONICS';
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+|       1 | Akash         | Male   |   24 | Pune   | Electronics | Laptop       | UPI          |        1 | 55000.00 |    4.8 | 2026-01-10 |
+|       4 | Priya         | Female |   25 | Pune   | Electronics | Mobile       | Card         |        1 | 25000.00 |    4.7 | 2026-01-13 |
+|       6 | Rohit         | Male   |   27 | Mumbai | Electronics | Headphones   | UPI          |        2 |  4000.00 |    4.3 | 2026-01-15 |
+|      10 | Vikas         | Male   |   31 | Jaipur | Electronics | Tablet       | Card         |        1 | 18000.00 |    4.5 | 2026-01-19 |
+|      12 | Arjun         | Male   |   30 | Delhi  | Electronics | Smart Watch  | Card         |        1 |  9000.00 |    4.6 | 2026-01-21 |
+|      15 | Meera         | Female |   28 | Pune   | Electronics | Camera       | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
+|      19 | Simran        | Female |   23 | Mumbai | Electronics | Earbuds      | UPI          |        2 |  2500.00 |    4.5 | 2026-01-28 |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SALES WHERE CATEGORY = 'FASHION';
++---------+---------------+--------+------+--------+----------+--------------+--------------+----------+---------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category | product_name | payment_mode | quantity | price   | rating | order_date |
++---------+---------------+--------+------+--------+----------+--------------+--------------+----------+---------+--------+------------+
+|       2 | Rahul         | Male   |   26 | Mumbai | Fashion  | Shirt        | Card         |        2 | 2500.00 |    4.2 | 2026-01-11 |
+|       7 | Riya          | Female |   24 | Delhi  | Fashion  | Jeans        | Card         |        1 | 2200.00 |    4.4 | 2026-01-16 |
+|      11 | Pooja         | Female |   27 | Pune   | Fashion  | Kurti        | UPI          |        2 | 1700.00 |    4.3 | 2026-01-20 |
+|      16 | Sahil         | Male   |   24 | Bhopal | Fashion  | Jacket       | UPI          |        1 | 3200.00 |    4.1 | 2026-01-25 |
+|      20 | Deepak        | Male   |   27 | Pune   | Fashion  | T-Shirt      | Card         |        3 | 1800.00 |    4.2 | 2026-01-29 |
++---------+---------------+--------+------+--------+----------+--------------+--------------+----------+---------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SALES WHERE CATEGORY = 'SPORTS';
++---------+---------------+--------+------+--------+----------+---------------+--------------+----------+---------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category | product_name  | payment_mode | quantity | price   | rating | order_date |
++---------+---------------+--------+------+--------+----------+---------------+--------------+----------+---------+--------+------------+
+|       5 | Aman          | Male   |   28 | Indore | Sports   | Cricket Bat   | Cash         |        1 | 3000.00 |    4.1 | 2026-01-14 |
+|       8 | Karan         | Male   |   29 | Pune   | Sports   | Football      | Cash         |        2 | 1800.00 |    4.0 | 2026-01-17 |
+|      14 | Yash          | Male   |   25 | Indore | Sports   | Badminton Kit | UPI          |        1 | 2800.00 |    4.4 | 2026-01-23 |
+|      18 | Harsh         | Male   |   32 | Delhi  | Sports   | Gym Gloves    | Cash         |        3 |  900.00 |    4.0 | 2026-01-27 |
++---------+---------------+--------+------+--------+----------+---------------+--------------+----------+---------+--------+------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT
+    ->
+    ->
+    -> SELECT * FROM SALES WHERE PRICE
+    -> SELECT * FROM SALES WHERE PRICE > 5000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SELECT * FROM SALES WHERE PRICE
+SELECT * FROM SALES WHERE PRICE > 5000' at line 4
+mysql> SELECT * FROM SALES WHERE PRICE > 5000;
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+|       1 | Akash         | Male   |   24 | Pune   | Electronics | Laptop       | UPI          |        1 | 55000.00 |    4.8 | 2026-01-10 |
+|       4 | Priya         | Female |   25 | Pune   | Electronics | Mobile       | Card         |        1 | 25000.00 |    4.7 | 2026-01-13 |
+|      10 | Vikas         | Male   |   31 | Jaipur | Electronics | Tablet       | Card         |        1 | 18000.00 |    4.5 | 2026-01-19 |
+|      12 | Arjun         | Male   |   30 | Delhi  | Electronics | Smart Watch  | Card         |        1 |  9000.00 |    4.6 | 2026-01-21 |
+|      15 | Meera         | Female |   28 | Pune   | Electronics | Camera       | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SALES WHERE PRICE < 5000;
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+---------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name  | payment_mode | quantity | price   | rating | order_date |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+---------+--------+------------+
+|       2 | Rahul         | Male   |   26 | Mumbai | Fashion     | Shirt         | Card         |        2 | 2500.00 |    4.2 | 2026-01-11 |
+|       3 | Sneha         | Female |   23 | Delhi  | Beauty      | Lipstick      | UPI          |        3 | 1500.00 |    4.5 | 2026-01-12 |
+|       5 | Aman          | Male   |   28 | Indore | Sports      | Cricket Bat   | Cash         |        1 | 3000.00 |    4.1 | 2026-01-14 |
+|       6 | Rohit         | Male   |   27 | Mumbai | Electronics | Headphones    | UPI          |        2 | 4000.00 |    4.3 | 2026-01-15 |
+|       7 | Riya          | Female |   24 | Delhi  | Fashion     | Jeans         | Card         |        1 | 2200.00 |    4.4 | 2026-01-16 |
+|       8 | Karan         | Male   |   29 | Pune   | Sports      | Football      | Cash         |        2 | 1800.00 |    4.0 | 2026-01-17 |
+|       9 | Neha          | Female |   22 | Bhopal | Beauty      | Face Wash     | UPI          |        4 |  800.00 |    4.6 | 2026-01-18 |
+|      11 | Pooja         | Female |   27 | Pune   | Fashion     | Kurti         | UPI          |        2 | 1700.00 |    4.3 | 2026-01-20 |
+|      13 | Anjali        | Female |   26 | Mumbai | Beauty      | Perfume       | Cash         |        1 | 3500.00 |    4.2 | 2026-01-22 |
+|      14 | Yash          | Male   |   25 | Indore | Sports      | Badminton Kit | UPI          |        1 | 2800.00 |    4.4 | 2026-01-23 |
+|      16 | Sahil         | Male   |   24 | Bhopal | Fashion     | Jacket        | UPI          |        1 | 3200.00 |    4.1 | 2026-01-25 |
+|      17 | Nikita        | Female |   29 | Jaipur | Beauty      | Moisturizer   | Card         |        2 | 1200.00 |    4.7 | 2026-01-26 |
+|      18 | Harsh         | Male   |   32 | Delhi  | Sports      | Gym Gloves    | Cash         |        3 |  900.00 |    4.0 | 2026-01-27 |
+|      19 | Simran        | Female |   23 | Mumbai | Electronics | Earbuds       | UPI          |        2 | 2500.00 |    4.5 | 2026-01-28 |
+|      20 | Deepak        | Male   |   27 | Pune   | Fashion     | T-Shirt       | Card         |        3 | 1800.00 |    4.2 | 2026-01-29 |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+---------+--------+------------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SALES WHERE AGE > 25;
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+|       2 | Rahul         | Male   |   26 | Mumbai | Fashion     | Shirt        | Card         |        2 |  2500.00 |    4.2 | 2026-01-11 |
+|       5 | Aman          | Male   |   28 | Indore | Sports      | Cricket Bat  | Cash         |        1 |  3000.00 |    4.1 | 2026-01-14 |
+|       6 | Rohit         | Male   |   27 | Mumbai | Electronics | Headphones   | UPI          |        2 |  4000.00 |    4.3 | 2026-01-15 |
+|       8 | Karan         | Male   |   29 | Pune   | Sports      | Football     | Cash         |        2 |  1800.00 |    4.0 | 2026-01-17 |
+|      10 | Vikas         | Male   |   31 | Jaipur | Electronics | Tablet       | Card         |        1 | 18000.00 |    4.5 | 2026-01-19 |
+|      11 | Pooja         | Female |   27 | Pune   | Fashion     | Kurti        | UPI          |        2 |  1700.00 |    4.3 | 2026-01-20 |
+|      12 | Arjun         | Male   |   30 | Delhi  | Electronics | Smart Watch  | Card         |        1 |  9000.00 |    4.6 | 2026-01-21 |
+|      13 | Anjali        | Female |   26 | Mumbai | Beauty      | Perfume      | Cash         |        1 |  3500.00 |    4.2 | 2026-01-22 |
+|      15 | Meera         | Female |   28 | Pune   | Electronics | Camera       | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
+|      17 | Nikita        | Female |   29 | Jaipur | Beauty      | Moisturizer  | Card         |        2 |  1200.00 |    4.7 | 2026-01-26 |
+|      18 | Harsh         | Male   |   32 | Delhi  | Sports      | Gym Gloves   | Cash         |        3 |   900.00 |    4.0 | 2026-01-27 |
+|      20 | Deepak        | Male   |   27 | Pune   | Fashion     | T-Shirt      | Card         |        3 |  1800.00 |    4.2 | 2026-01-29 |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SALES WHERE AGE < 25;
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+|       1 | Akash         | Male   |   24 | Pune   | Electronics | Laptop       | UPI          |        1 | 55000.00 |    4.8 | 2026-01-10 |
+|       3 | Sneha         | Female |   23 | Delhi  | Beauty      | Lipstick     | UPI          |        3 |  1500.00 |    4.5 | 2026-01-12 |
+|       7 | Riya          | Female |   24 | Delhi  | Fashion     | Jeans        | Card         |        1 |  2200.00 |    4.4 | 2026-01-16 |
+|       9 | Neha          | Female |   22 | Bhopal | Beauty      | Face Wash    | UPI          |        4 |   800.00 |    4.6 | 2026-01-18 |
+|      16 | Sahil         | Male   |   24 | Bhopal | Fashion     | Jacket       | UPI          |        1 |  3200.00 |    4.1 | 2026-01-25 |
+|      19 | Simran        | Female |   23 | Mumbai | Electronics | Earbuds      | UPI          |        2 |  2500.00 |    4.5 | 2026-01-28 |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SALES WHERE RATING > 4.5;
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+|       1 | Akash         | Male   |   24 | Pune   | Electronics | Laptop       | UPI          |        1 | 55000.00 |    4.8 | 2026-01-10 |
+|       4 | Priya         | Female |   25 | Pune   | Electronics | Mobile       | Card         |        1 | 25000.00 |    4.7 | 2026-01-13 |
+|       9 | Neha          | Female |   22 | Bhopal | Beauty      | Face Wash    | UPI          |        4 |   800.00 |    4.6 | 2026-01-18 |
+|      12 | Arjun         | Male   |   30 | Delhi  | Electronics | Smart Watch  | Card         |        1 |  9000.00 |    4.6 | 2026-01-21 |
+|      15 | Meera         | Female |   28 | Pune   | Electronics | Camera       | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
+|      17 | Nikita        | Female |   29 | Jaipur | Beauty      | Moisturizer  | Card         |        2 |  1200.00 |    4.7 | 2026-01-26 |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SALES WHERE PAYMENT_MODE = 'UPI';
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name  | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+|       1 | Akash         | Male   |   24 | Pune   | Electronics | Laptop        | UPI          |        1 | 55000.00 |    4.8 | 2026-01-10 |
+|       3 | Sneha         | Female |   23 | Delhi  | Beauty      | Lipstick      | UPI          |        3 |  1500.00 |    4.5 | 2026-01-12 |
+|       6 | Rohit         | Male   |   27 | Mumbai | Electronics | Headphones    | UPI          |        2 |  4000.00 |    4.3 | 2026-01-15 |
+|       9 | Neha          | Female |   22 | Bhopal | Beauty      | Face Wash     | UPI          |        4 |   800.00 |    4.6 | 2026-01-18 |
+|      11 | Pooja         | Female |   27 | Pune   | Fashion     | Kurti         | UPI          |        2 |  1700.00 |    4.3 | 2026-01-20 |
+|      14 | Yash          | Male   |   25 | Indore | Sports      | Badminton Kit | UPI          |        1 |  2800.00 |    4.4 | 2026-01-23 |
+|      16 | Sahil         | Male   |   24 | Bhopal | Fashion     | Jacket        | UPI          |        1 |  3200.00 |    4.1 | 2026-01-25 |
+|      19 | Simran        | Female |   23 | Mumbai | Electronics | Earbuds       | UPI          |        2 |  2500.00 |    4.5 | 2026-01-28 |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT  * FROM SALES WHERE PAYMENT_MODE = 'CARD';
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+|       2 | Rahul         | Male   |   26 | Mumbai | Fashion     | Shirt        | Card         |        2 |  2500.00 |    4.2 | 2026-01-11 |
+|       4 | Priya         | Female |   25 | Pune   | Electronics | Mobile       | Card         |        1 | 25000.00 |    4.7 | 2026-01-13 |
+|       7 | Riya          | Female |   24 | Delhi  | Fashion     | Jeans        | Card         |        1 |  2200.00 |    4.4 | 2026-01-16 |
+|      10 | Vikas         | Male   |   31 | Jaipur | Electronics | Tablet       | Card         |        1 | 18000.00 |    4.5 | 2026-01-19 |
+|      12 | Arjun         | Male   |   30 | Delhi  | Electronics | Smart Watch  | Card         |        1 |  9000.00 |    4.6 | 2026-01-21 |
+|      15 | Meera         | Female |   28 | Pune   | Electronics | Camera       | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
+|      17 | Nikita        | Female |   29 | Jaipur | Beauty      | Moisturizer  | Card         |        2 |  1200.00 |    4.7 | 2026-01-26 |
+|      20 | Deepak        | Male   |   27 | Pune   | Fashion     | T-Shirt      | Card         |        3 |  1800.00 |    4.2 | 2026-01-29 |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SALES WHERE CATEGORY = 'ELECTRONICS' AND CITY = 'PUNE';
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city | category    | product_name | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+|       1 | Akash         | Male   |   24 | Pune | Electronics | Laptop       | UPI          |        1 | 55000.00 |    4.8 | 2026-01-10 |
+|       4 | Priya         | Female |   25 | Pune | Electronics | Mobile       | Card         |        1 | 25000.00 |    4.7 | 2026-01-13 |
+|      15 | Meera         | Female |   28 | Pune | Electronics | Camera       | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SALES WHERE CATEGORY = 'FASHION' AND CITY = 'MUMBAI';
++---------+---------------+--------+------+--------+----------+--------------+--------------+----------+---------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category | product_name | payment_mode | quantity | price   | rating | order_date |
++---------+---------------+--------+------+--------+----------+--------------+--------------+----------+---------+--------+------------+
+|       2 | Rahul         | Male   |   26 | Mumbai | Fashion  | Shirt        | Card         |        2 | 2500.00 |    4.2 | 2026-01-11 |
++---------+---------------+--------+------+--------+----------+--------------+--------------+----------+---------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM SALES WHERE GENDER = 'FEMALE' AND CITY = 'DELHI';
++---------+---------------+--------+------+-------+----------+--------------+--------------+----------+---------+--------+------------+
+| sale_id | customer_name | gender | age  | city  | category | product_name | payment_mode | quantity | price   | rating | order_date |
++---------+---------------+--------+------+-------+----------+--------------+--------------+----------+---------+--------+------------+
+|       3 | Sneha         | Female |   23 | Delhi | Beauty   | Lipstick     | UPI          |        3 | 1500.00 |    4.5 | 2026-01-12 |
+|       7 | Riya          | Female |   24 | Delhi | Fashion  | Jeans        | Card         |        1 | 2200.00 |    4.4 | 2026-01-16 |
++---------+---------------+--------+------+-------+----------+--------------+--------------+----------+---------+--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SALES WHERE GENDER = 'MALE' AND CITY = 'PUNE';
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city | category    | product_name | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+|       1 | Akash         | Male   |   24 | Pune | Electronics | Laptop       | UPI          |        1 | 55000.00 |    4.8 | 2026-01-10 |
+|       8 | Karan         | Male   |   29 | Pune | Sports      | Football     | Cash         |        2 |  1800.00 |    4.0 | 2026-01-17 |
+|      20 | Deepak        | Male   |   27 | Pune | Fashion     | T-Shirt      | Card         |        3 |  1800.00 |    4.2 | 2026-01-29 |
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SALES WHERE SALES WHERE PRICE BETWEEN 2000 AND 10000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE PRICE BETWEEN 2000 AND 10000' at line 1
+mysql> SELECT * FROM SALES WHERE PRICE BETWEEN 2000 AND 10000;
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+---------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name  | payment_mode | quantity | price   | rating | order_date |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+---------+--------+------------+
+|       2 | Rahul         | Male   |   26 | Mumbai | Fashion     | Shirt         | Card         |        2 | 2500.00 |    4.2 | 2026-01-11 |
+|       5 | Aman          | Male   |   28 | Indore | Sports      | Cricket Bat   | Cash         |        1 | 3000.00 |    4.1 | 2026-01-14 |
+|       6 | Rohit         | Male   |   27 | Mumbai | Electronics | Headphones    | UPI          |        2 | 4000.00 |    4.3 | 2026-01-15 |
+|       7 | Riya          | Female |   24 | Delhi  | Fashion     | Jeans         | Card         |        1 | 2200.00 |    4.4 | 2026-01-16 |
+|      12 | Arjun         | Male   |   30 | Delhi  | Electronics | Smart Watch   | Card         |        1 | 9000.00 |    4.6 | 2026-01-21 |
+|      13 | Anjali        | Female |   26 | Mumbai | Beauty      | Perfume       | Cash         |        1 | 3500.00 |    4.2 | 2026-01-22 |
+|      14 | Yash          | Male   |   25 | Indore | Sports      | Badminton Kit | UPI          |        1 | 2800.00 |    4.4 | 2026-01-23 |
+|      16 | Sahil         | Male   |   24 | Bhopal | Fashion     | Jacket        | UPI          |        1 | 3200.00 |    4.1 | 2026-01-25 |
+|      19 | Simran        | Female |   23 | Mumbai | Electronics | Earbuds       | UPI          |        2 | 2500.00 |    4.5 | 2026-01-28 |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+---------+--------+------------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SALES WHERE AGE BETWEEN 24 AND 30;
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name  | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+|       1 | Akash         | Male   |   24 | Pune   | Electronics | Laptop        | UPI          |        1 | 55000.00 |    4.8 | 2026-01-10 |
+|       2 | Rahul         | Male   |   26 | Mumbai | Fashion     | Shirt         | Card         |        2 |  2500.00 |    4.2 | 2026-01-11 |
+|       4 | Priya         | Female |   25 | Pune   | Electronics | Mobile        | Card         |        1 | 25000.00 |    4.7 | 2026-01-13 |
+|       5 | Aman          | Male   |   28 | Indore | Sports      | Cricket Bat   | Cash         |        1 |  3000.00 |    4.1 | 2026-01-14 |
+|       6 | Rohit         | Male   |   27 | Mumbai | Electronics | Headphones    | UPI          |        2 |  4000.00 |    4.3 | 2026-01-15 |
+|       7 | Riya          | Female |   24 | Delhi  | Fashion     | Jeans         | Card         |        1 |  2200.00 |    4.4 | 2026-01-16 |
+|       8 | Karan         | Male   |   29 | Pune   | Sports      | Football      | Cash         |        2 |  1800.00 |    4.0 | 2026-01-17 |
+|      11 | Pooja         | Female |   27 | Pune   | Fashion     | Kurti         | UPI          |        2 |  1700.00 |    4.3 | 2026-01-20 |
+|      12 | Arjun         | Male   |   30 | Delhi  | Electronics | Smart Watch   | Card         |        1 |  9000.00 |    4.6 | 2026-01-21 |
+|      13 | Anjali        | Female |   26 | Mumbai | Beauty      | Perfume       | Cash         |        1 |  3500.00 |    4.2 | 2026-01-22 |
+|      14 | Yash          | Male   |   25 | Indore | Sports      | Badminton Kit | UPI          |        1 |  2800.00 |    4.4 | 2026-01-23 |
+|      15 | Meera         | Female |   28 | Pune   | Electronics | Camera        | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
+|      16 | Sahil         | Male   |   24 | Bhopal | Fashion     | Jacket        | UPI          |        1 |  3200.00 |    4.1 | 2026-01-25 |
+|      17 | Nikita        | Female |   29 | Jaipur | Beauty      | Moisturizer   | Card         |        2 |  1200.00 |    4.7 | 2026-01-26 |
+|      20 | Deepak        | Male   |   27 | Pune   | Fashion     | T-Shirt       | Card         |        3 |  1800.00 |    4.2 | 2026-01-29 |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SALES WHERE ORDER_DATE > '2026-01-20';
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name  | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+|      12 | Arjun         | Male   |   30 | Delhi  | Electronics | Smart Watch   | Card         |        1 |  9000.00 |    4.6 | 2026-01-21 |
+|      13 | Anjali        | Female |   26 | Mumbai | Beauty      | Perfume       | Cash         |        1 |  3500.00 |    4.2 | 2026-01-22 |
+|      14 | Yash          | Male   |   25 | Indore | Sports      | Badminton Kit | UPI          |        1 |  2800.00 |    4.4 | 2026-01-23 |
+|      15 | Meera         | Female |   28 | Pune   | Electronics | Camera        | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
+|      16 | Sahil         | Male   |   24 | Bhopal | Fashion     | Jacket        | UPI          |        1 |  3200.00 |    4.1 | 2026-01-25 |
+|      17 | Nikita        | Female |   29 | Jaipur | Beauty      | Moisturizer   | Card         |        2 |  1200.00 |    4.7 | 2026-01-26 |
+|      18 | Harsh         | Male   |   32 | Delhi  | Sports      | Gym Gloves    | Cash         |        3 |   900.00 |    4.0 | 2026-01-27 |
+|      19 | Simran        | Female |   23 | Mumbai | Electronics | Earbuds       | UPI          |        2 |  2500.00 |    4.5 | 2026-01-28 |
+|      20 | Deepak        | Male   |   27 | Pune   | Fashion     | T-Shirt       | Card         |        3 |  1800.00 |    4.2 | 2026-01-29 |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SALES ORDER BY PRICE ASC;
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name  | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+|       9 | Neha          | Female |   22 | Bhopal | Beauty      | Face Wash     | UPI          |        4 |   800.00 |    4.6 | 2026-01-18 |
+|      18 | Harsh         | Male   |   32 | Delhi  | Sports      | Gym Gloves    | Cash         |        3 |   900.00 |    4.0 | 2026-01-27 |
+|      17 | Nikita        | Female |   29 | Jaipur | Beauty      | Moisturizer   | Card         |        2 |  1200.00 |    4.7 | 2026-01-26 |
+|       3 | Sneha         | Female |   23 | Delhi  | Beauty      | Lipstick      | UPI          |        3 |  1500.00 |    4.5 | 2026-01-12 |
+|      11 | Pooja         | Female |   27 | Pune   | Fashion     | Kurti         | UPI          |        2 |  1700.00 |    4.3 | 2026-01-20 |
+|       8 | Karan         | Male   |   29 | Pune   | Sports      | Football      | Cash         |        2 |  1800.00 |    4.0 | 2026-01-17 |
+|      20 | Deepak        | Male   |   27 | Pune   | Fashion     | T-Shirt       | Card         |        3 |  1800.00 |    4.2 | 2026-01-29 |
+|       7 | Riya          | Female |   24 | Delhi  | Fashion     | Jeans         | Card         |        1 |  2200.00 |    4.4 | 2026-01-16 |
+|       2 | Rahul         | Male   |   26 | Mumbai | Fashion     | Shirt         | Card         |        2 |  2500.00 |    4.2 | 2026-01-11 |
+|      19 | Simran        | Female |   23 | Mumbai | Electronics | Earbuds       | UPI          |        2 |  2500.00 |    4.5 | 2026-01-28 |
+|      14 | Yash          | Male   |   25 | Indore | Sports      | Badminton Kit | UPI          |        1 |  2800.00 |    4.4 | 2026-01-23 |
+|       5 | Aman          | Male   |   28 | Indore | Sports      | Cricket Bat   | Cash         |        1 |  3000.00 |    4.1 | 2026-01-14 |
+|      16 | Sahil         | Male   |   24 | Bhopal | Fashion     | Jacket        | UPI          |        1 |  3200.00 |    4.1 | 2026-01-25 |
+|      13 | Anjali        | Female |   26 | Mumbai | Beauty      | Perfume       | Cash         |        1 |  3500.00 |    4.2 | 2026-01-22 |
+|       6 | Rohit         | Male   |   27 | Mumbai | Electronics | Headphones    | UPI          |        2 |  4000.00 |    4.3 | 2026-01-15 |
+|      12 | Arjun         | Male   |   30 | Delhi  | Electronics | Smart Watch   | Card         |        1 |  9000.00 |    4.6 | 2026-01-21 |
+|      10 | Vikas         | Male   |   31 | Jaipur | Electronics | Tablet        | Card         |        1 | 18000.00 |    4.5 | 2026-01-19 |
+|       4 | Priya         | Female |   25 | Pune   | Electronics | Mobile        | Card         |        1 | 25000.00 |    4.7 | 2026-01-13 |
+|      15 | Meera         | Female |   28 | Pune   | Electronics | Camera        | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
+|       1 | Akash         | Male   |   24 | Pune   | Electronics | Laptop        | UPI          |        1 | 55000.00 |    4.8 | 2026-01-10 |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+20 rows in set (0.00 sec)
+
+mysql>  SELECT * FROM SALES ORDER BY PRICE DESC;
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name  | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+|       1 | Akash         | Male   |   24 | Pune   | Electronics | Laptop        | UPI          |        1 | 55000.00 |    4.8 | 2026-01-10 |
+|      15 | Meera         | Female |   28 | Pune   | Electronics | Camera        | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
+|       4 | Priya         | Female |   25 | Pune   | Electronics | Mobile        | Card         |        1 | 25000.00 |    4.7 | 2026-01-13 |
+|      10 | Vikas         | Male   |   31 | Jaipur | Electronics | Tablet        | Card         |        1 | 18000.00 |    4.5 | 2026-01-19 |
+|      12 | Arjun         | Male   |   30 | Delhi  | Electronics | Smart Watch   | Card         |        1 |  9000.00 |    4.6 | 2026-01-21 |
+|       6 | Rohit         | Male   |   27 | Mumbai | Electronics | Headphones    | UPI          |        2 |  4000.00 |    4.3 | 2026-01-15 |
+|      13 | Anjali        | Female |   26 | Mumbai | Beauty      | Perfume       | Cash         |        1 |  3500.00 |    4.2 | 2026-01-22 |
+|      16 | Sahil         | Male   |   24 | Bhopal | Fashion     | Jacket        | UPI          |        1 |  3200.00 |    4.1 | 2026-01-25 |
+|       5 | Aman          | Male   |   28 | Indore | Sports      | Cricket Bat   | Cash         |        1 |  3000.00 |    4.1 | 2026-01-14 |
+|      14 | Yash          | Male   |   25 | Indore | Sports      | Badminton Kit | UPI          |        1 |  2800.00 |    4.4 | 2026-01-23 |
+|       2 | Rahul         | Male   |   26 | Mumbai | Fashion     | Shirt         | Card         |        2 |  2500.00 |    4.2 | 2026-01-11 |
+|      19 | Simran        | Female |   23 | Mumbai | Electronics | Earbuds       | UPI          |        2 |  2500.00 |    4.5 | 2026-01-28 |
+|       7 | Riya          | Female |   24 | Delhi  | Fashion     | Jeans         | Card         |        1 |  2200.00 |    4.4 | 2026-01-16 |
+|       8 | Karan         | Male   |   29 | Pune   | Sports      | Football      | Cash         |        2 |  1800.00 |    4.0 | 2026-01-17 |
+|      20 | Deepak        | Male   |   27 | Pune   | Fashion     | T-Shirt       | Card         |        3 |  1800.00 |    4.2 | 2026-01-29 |
+|      11 | Pooja         | Female |   27 | Pune   | Fashion     | Kurti         | UPI          |        2 |  1700.00 |    4.3 | 2026-01-20 |
+|       3 | Sneha         | Female |   23 | Delhi  | Beauty      | Lipstick      | UPI          |        3 |  1500.00 |    4.5 | 2026-01-12 |
+|      17 | Nikita        | Female |   29 | Jaipur | Beauty      | Moisturizer   | Card         |        2 |  1200.00 |    4.7 | 2026-01-26 |
+|      18 | Harsh         | Male   |   32 | Delhi  | Sports      | Gym Gloves    | Cash         |        3 |   900.00 |    4.0 | 2026-01-27 |
+|       9 | Neha          | Female |   22 | Bhopal | Beauty      | Face Wash     | UPI          |        4 |   800.00 |    4.6 | 2026-01-18 |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+20 rows in set (0.00 sec)
+
+mysql>  SELECT * FROM SALES ORDER BY AGE ASC;
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name  | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+|       9 | Neha          | Female |   22 | Bhopal | Beauty      | Face Wash     | UPI          |        4 |   800.00 |    4.6 | 2026-01-18 |
+|       3 | Sneha         | Female |   23 | Delhi  | Beauty      | Lipstick      | UPI          |        3 |  1500.00 |    4.5 | 2026-01-12 |
+|      19 | Simran        | Female |   23 | Mumbai | Electronics | Earbuds       | UPI          |        2 |  2500.00 |    4.5 | 2026-01-28 |
+|       1 | Akash         | Male   |   24 | Pune   | Electronics | Laptop        | UPI          |        1 | 55000.00 |    4.8 | 2026-01-10 |
+|       7 | Riya          | Female |   24 | Delhi  | Fashion     | Jeans         | Card         |        1 |  2200.00 |    4.4 | 2026-01-16 |
+|      16 | Sahil         | Male   |   24 | Bhopal | Fashion     | Jacket        | UPI          |        1 |  3200.00 |    4.1 | 2026-01-25 |
+|       4 | Priya         | Female |   25 | Pune   | Electronics | Mobile        | Card         |        1 | 25000.00 |    4.7 | 2026-01-13 |
+|      14 | Yash          | Male   |   25 | Indore | Sports      | Badminton Kit | UPI          |        1 |  2800.00 |    4.4 | 2026-01-23 |
+|       2 | Rahul         | Male   |   26 | Mumbai | Fashion     | Shirt         | Card         |        2 |  2500.00 |    4.2 | 2026-01-11 |
+|      13 | Anjali        | Female |   26 | Mumbai | Beauty      | Perfume       | Cash         |        1 |  3500.00 |    4.2 | 2026-01-22 |
+|       6 | Rohit         | Male   |   27 | Mumbai | Electronics | Headphones    | UPI          |        2 |  4000.00 |    4.3 | 2026-01-15 |
+|      11 | Pooja         | Female |   27 | Pune   | Fashion     | Kurti         | UPI          |        2 |  1700.00 |    4.3 | 2026-01-20 |
+|      20 | Deepak        | Male   |   27 | Pune   | Fashion     | T-Shirt       | Card         |        3 |  1800.00 |    4.2 | 2026-01-29 |
+|       5 | Aman          | Male   |   28 | Indore | Sports      | Cricket Bat   | Cash         |        1 |  3000.00 |    4.1 | 2026-01-14 |
+|      15 | Meera         | Female |   28 | Pune   | Electronics | Camera        | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
+|       8 | Karan         | Male   |   29 | Pune   | Sports      | Football      | Cash         |        2 |  1800.00 |    4.0 | 2026-01-17 |
+|      17 | Nikita        | Female |   29 | Jaipur | Beauty      | Moisturizer   | Card         |        2 |  1200.00 |    4.7 | 2026-01-26 |
+|      12 | Arjun         | Male   |   30 | Delhi  | Electronics | Smart Watch   | Card         |        1 |  9000.00 |    4.6 | 2026-01-21 |
+|      10 | Vikas         | Male   |   31 | Jaipur | Electronics | Tablet        | Card         |        1 | 18000.00 |    4.5 | 2026-01-19 |
+|      18 | Harsh         | Male   |   32 | Delhi  | Sports      | Gym Gloves    | Cash         |        3 |   900.00 |    4.0 | 2026-01-27 |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+20 rows in set (0.00 sec)
+
+mysql>  SELECT * FROM SALES ORDER BY AGE DESC;
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name  | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+|      18 | Harsh         | Male   |   32 | Delhi  | Sports      | Gym Gloves    | Cash         |        3 |   900.00 |    4.0 | 2026-01-27 |
+|      10 | Vikas         | Male   |   31 | Jaipur | Electronics | Tablet        | Card         |        1 | 18000.00 |    4.5 | 2026-01-19 |
+|      12 | Arjun         | Male   |   30 | Delhi  | Electronics | Smart Watch   | Card         |        1 |  9000.00 |    4.6 | 2026-01-21 |
+|       8 | Karan         | Male   |   29 | Pune   | Sports      | Football      | Cash         |        2 |  1800.00 |    4.0 | 2026-01-17 |
+|      17 | Nikita        | Female |   29 | Jaipur | Beauty      | Moisturizer   | Card         |        2 |  1200.00 |    4.7 | 2026-01-26 |
+|       5 | Aman          | Male   |   28 | Indore | Sports      | Cricket Bat   | Cash         |        1 |  3000.00 |    4.1 | 2026-01-14 |
+|      15 | Meera         | Female |   28 | Pune   | Electronics | Camera        | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
+|       6 | Rohit         | Male   |   27 | Mumbai | Electronics | Headphones    | UPI          |        2 |  4000.00 |    4.3 | 2026-01-15 |
+|      11 | Pooja         | Female |   27 | Pune   | Fashion     | Kurti         | UPI          |        2 |  1700.00 |    4.3 | 2026-01-20 |
+|      20 | Deepak        | Male   |   27 | Pune   | Fashion     | T-Shirt       | Card         |        3 |  1800.00 |    4.2 | 2026-01-29 |
+|       2 | Rahul         | Male   |   26 | Mumbai | Fashion     | Shirt         | Card         |        2 |  2500.00 |    4.2 | 2026-01-11 |
+|      13 | Anjali        | Female |   26 | Mumbai | Beauty      | Perfume       | Cash         |        1 |  3500.00 |    4.2 | 2026-01-22 |
+|       4 | Priya         | Female |   25 | Pune   | Electronics | Mobile        | Card         |        1 | 25000.00 |    4.7 | 2026-01-13 |
+|      14 | Yash          | Male   |   25 | Indore | Sports      | Badminton Kit | UPI          |        1 |  2800.00 |    4.4 | 2026-01-23 |
+|       1 | Akash         | Male   |   24 | Pune   | Electronics | Laptop        | UPI          |        1 | 55000.00 |    4.8 | 2026-01-10 |
+|       7 | Riya          | Female |   24 | Delhi  | Fashion     | Jeans         | Card         |        1 |  2200.00 |    4.4 | 2026-01-16 |
+|      16 | Sahil         | Male   |   24 | Bhopal | Fashion     | Jacket        | UPI          |        1 |  3200.00 |    4.1 | 2026-01-25 |
+|       3 | Sneha         | Female |   23 | Delhi  | Beauty      | Lipstick      | UPI          |        3 |  1500.00 |    4.5 | 2026-01-12 |
+|      19 | Simran        | Female |   23 | Mumbai | Electronics | Earbuds       | UPI          |        2 |  2500.00 |    4.5 | 2026-01-28 |
+|       9 | Neha          | Female |   22 | Bhopal | Beauty      | Face Wash     | UPI          |        4 |   800.00 |    4.6 | 2026-01-18 |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+20 rows in set (0.00 sec)
+
+mysql>   SELECT * FROM SALES ORDER BY RATING DESC;
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name  | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+|      15 | Meera         | Female |   28 | Pune   | Electronics | Camera        | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
+|       1 | Akash         | Male   |   24 | Pune   | Electronics | Laptop        | UPI          |        1 | 55000.00 |    4.8 | 2026-01-10 |
+|       4 | Priya         | Female |   25 | Pune   | Electronics | Mobile        | Card         |        1 | 25000.00 |    4.7 | 2026-01-13 |
+|      17 | Nikita        | Female |   29 | Jaipur | Beauty      | Moisturizer   | Card         |        2 |  1200.00 |    4.7 | 2026-01-26 |
+|       9 | Neha          | Female |   22 | Bhopal | Beauty      | Face Wash     | UPI          |        4 |   800.00 |    4.6 | 2026-01-18 |
+|      12 | Arjun         | Male   |   30 | Delhi  | Electronics | Smart Watch   | Card         |        1 |  9000.00 |    4.6 | 2026-01-21 |
+|       3 | Sneha         | Female |   23 | Delhi  | Beauty      | Lipstick      | UPI          |        3 |  1500.00 |    4.5 | 2026-01-12 |
+|      10 | Vikas         | Male   |   31 | Jaipur | Electronics | Tablet        | Card         |        1 | 18000.00 |    4.5 | 2026-01-19 |
+|      19 | Simran        | Female |   23 | Mumbai | Electronics | Earbuds       | UPI          |        2 |  2500.00 |    4.5 | 2026-01-28 |
+|       7 | Riya          | Female |   24 | Delhi  | Fashion     | Jeans         | Card         |        1 |  2200.00 |    4.4 | 2026-01-16 |
+|      14 | Yash          | Male   |   25 | Indore | Sports      | Badminton Kit | UPI          |        1 |  2800.00 |    4.4 | 2026-01-23 |
+|       6 | Rohit         | Male   |   27 | Mumbai | Electronics | Headphones    | UPI          |        2 |  4000.00 |    4.3 | 2026-01-15 |
+|      11 | Pooja         | Female |   27 | Pune   | Fashion     | Kurti         | UPI          |        2 |  1700.00 |    4.3 | 2026-01-20 |
+|       2 | Rahul         | Male   |   26 | Mumbai | Fashion     | Shirt         | Card         |        2 |  2500.00 |    4.2 | 2026-01-11 |
+|      13 | Anjali        | Female |   26 | Mumbai | Beauty      | Perfume       | Cash         |        1 |  3500.00 |    4.2 | 2026-01-22 |
+|      20 | Deepak        | Male   |   27 | Pune   | Fashion     | T-Shirt       | Card         |        3 |  1800.00 |    4.2 | 2026-01-29 |
+|       5 | Aman          | Male   |   28 | Indore | Sports      | Cricket Bat   | Cash         |        1 |  3000.00 |    4.1 | 2026-01-14 |
+|      16 | Sahil         | Male   |   24 | Bhopal | Fashion     | Jacket        | UPI          |        1 |  3200.00 |    4.1 | 2026-01-25 |
+|       8 | Karan         | Male   |   29 | Pune   | Sports      | Football      | Cash         |        2 |  1800.00 |    4.0 | 2026-01-17 |
+|      18 | Harsh         | Male   |   32 | Delhi  | Sports      | Gym Gloves    | Cash         |        3 |   900.00 |    4.0 | 2026-01-27 |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+20 rows in set (0.00 sec)
+
+mysql>   SELECT * FROM SALES ORDER BY PRICE DESC LIMIT 1;
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city | category    | product_name | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+|       1 | Akash         | Male   |   24 | Pune | Electronics | Laptop       | UPI          |        1 | 55000.00 |    4.8 | 2026-01-10 |
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM SALES ORDER BY PRICE ASC LIMIT 1;
++---------+---------------+--------+------+--------+----------+--------------+--------------+----------+--------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category | product_name | payment_mode | quantity | price  | rating | order_date |
++---------+---------------+--------+------+--------+----------+--------------+--------------+----------+--------+--------+------------+
+|       9 | Neha          | Female |   22 | Bhopal | Beauty   | Face Wash    | UPI          |        4 | 800.00 |    4.6 | 2026-01-18 |
++---------+---------------+--------+------+--------+----------+--------------+--------------+----------+--------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM SALES ORDER BY RATING DESC LIMIT 1;
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city | category    | product_name | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+|      15 | Meera         | Female |   28 | Pune | Electronics | Camera       | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM SALES ORDER BY ORDER_DATE DESC LIMIT 1;
++---------+---------------+--------+------+------+----------+--------------+--------------+----------+---------+--------+------------+
+| sale_id | customer_name | gender | age  | city | category | product_name | payment_mode | quantity | price   | rating | order_date |
++---------+---------------+--------+------+------+----------+--------------+--------------+----------+---------+--------+------------+
+|      20 | Deepak        | Male   |   27 | Pune | Fashion  | T-Shirt      | Card         |        3 | 1800.00 |    4.2 | 2026-01-29 |
++---------+---------------+--------+------+------+----------+--------------+--------------+----------+---------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql>  SELECT * FROM SALES ORDER BY ORDER_DATE ASC LIMIT 1;
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city | category    | product_name | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+|       1 | Akash         | Male   |   24 | Pune | Electronics | Laptop       | UPI          |        1 | 55000.00 |    4.8 | 2026-01-10 |
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM SALES LIMIT 5;
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+|       1 | Akash         | Male   |   24 | Pune   | Electronics | Laptop       | UPI          |        1 | 55000.00 |    4.8 | 2026-01-10 |
+|       2 | Rahul         | Male   |   26 | Mumbai | Fashion     | Shirt        | Card         |        2 |  2500.00 |    4.2 | 2026-01-11 |
+|       3 | Sneha         | Female |   23 | Delhi  | Beauty      | Lipstick     | UPI          |        3 |  1500.00 |    4.5 | 2026-01-12 |
+|       4 | Priya         | Female |   25 | Pune   | Electronics | Mobile       | Card         |        1 | 25000.00 |    4.7 | 2026-01-13 |
+|       5 | Aman          | Male   |   28 | Indore | Sports      | Cricket Bat  | Cash         |        1 |  3000.00 |    4.1 | 2026-01-14 |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SALES ORDER BY PRICE DESC LIMIT 3;
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city | category    | product_name | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+|       1 | Akash         | Male   |   24 | Pune | Electronics | Laptop       | UPI          |        1 | 55000.00 |    4.8 | 2026-01-10 |
+|      15 | Meera         | Female |   28 | Pune | Electronics | Camera       | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
+|       4 | Priya         | Female |   25 | Pune | Electronics | Mobile       | Card         |        1 | 25000.00 |    4.7 | 2026-01-13 |
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql>  SELECT * FROM SALES ORDER BY RATING DESC LIMIT 5;
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+|      15 | Meera         | Female |   28 | Pune   | Electronics | Camera       | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
+|       1 | Akash         | Male   |   24 | Pune   | Electronics | Laptop       | UPI          |        1 | 55000.00 |    4.8 | 2026-01-10 |
+|      17 | Nikita        | Female |   29 | Jaipur | Beauty      | Moisturizer  | Card         |        2 |  1200.00 |    4.7 | 2026-01-26 |
+|       4 | Priya         | Female |   25 | Pune   | Electronics | Mobile       | Card         |        1 | 25000.00 |    4.7 | 2026-01-13 |
+|       9 | Neha          | Female |   22 | Bhopal | Beauty      | Face Wash    | UPI          |        4 |   800.00 |    4.6 | 2026-01-18 |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SALES ORDER BY PRICE DESC LIMIT 1 OFFSET 1;
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city | category    | product_name | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+|      15 | Meera         | Female |   28 | Pune | Electronics | Camera       | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql>  SELECT * FROM SALES ORDER BY PRICE DESC LIMIT 1 OFFSET 2;
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city | category    | product_name | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+|       4 | Priya         | Female |   25 | Pune | Electronics | Mobile       | Card         |        1 | 25000.00 |    4.7 | 2026-01-13 |
++---------+---------------+--------+------+------+-------------+--------------+--------------+----------+----------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql>  SELECT * FROM SALES LIMIT 18446744073709551615 OFFSET 5;
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name  | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+|       6 | Rohit         | Male   |   27 | Mumbai | Electronics | Headphones    | UPI          |        2 |  4000.00 |    4.3 | 2026-01-15 |
+|       7 | Riya          | Female |   24 | Delhi  | Fashion     | Jeans         | Card         |        1 |  2200.00 |    4.4 | 2026-01-16 |
+|       8 | Karan         | Male   |   29 | Pune   | Sports      | Football      | Cash         |        2 |  1800.00 |    4.0 | 2026-01-17 |
+|       9 | Neha          | Female |   22 | Bhopal | Beauty      | Face Wash     | UPI          |        4 |   800.00 |    4.6 | 2026-01-18 |
+|      10 | Vikas         | Male   |   31 | Jaipur | Electronics | Tablet        | Card         |        1 | 18000.00 |    4.5 | 2026-01-19 |
+|      11 | Pooja         | Female |   27 | Pune   | Fashion     | Kurti         | UPI          |        2 |  1700.00 |    4.3 | 2026-01-20 |
+|      12 | Arjun         | Male   |   30 | Delhi  | Electronics | Smart Watch   | Card         |        1 |  9000.00 |    4.6 | 2026-01-21 |
+|      13 | Anjali        | Female |   26 | Mumbai | Beauty      | Perfume       | Cash         |        1 |  3500.00 |    4.2 | 2026-01-22 |
+|      14 | Yash          | Male   |   25 | Indore | Sports      | Badminton Kit | UPI          |        1 |  2800.00 |    4.4 | 2026-01-23 |
+|      15 | Meera         | Female |   28 | Pune   | Electronics | Camera        | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
+|      16 | Sahil         | Male   |   24 | Bhopal | Fashion     | Jacket        | UPI          |        1 |  3200.00 |    4.1 | 2026-01-25 |
+|      17 | Nikita        | Female |   29 | Jaipur | Beauty      | Moisturizer   | Card         |        2 |  1200.00 |    4.7 | 2026-01-26 |
+|      18 | Harsh         | Male   |   32 | Delhi  | Sports      | Gym Gloves    | Cash         |        3 |   900.00 |    4.0 | 2026-01-27 |
+|      19 | Simran        | Female |   23 | Mumbai | Electronics | Earbuds       | UPI          |        2 |  2500.00 |    4.5 | 2026-01-28 |
+|      20 | Deepak        | Male   |   27 | Pune   | Fashion     | T-Shirt       | Card         |        3 |  1800.00 |    4.2 | 2026-01-29 |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SALES LIMIT 5 OFFSET 5;
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+|       6 | Rohit         | Male   |   27 | Mumbai | Electronics | Headphones   | UPI          |        2 |  4000.00 |    4.3 | 2026-01-15 |
+|       7 | Riya          | Female |   24 | Delhi  | Fashion     | Jeans        | Card         |        1 |  2200.00 |    4.4 | 2026-01-16 |
+|       8 | Karan         | Male   |   29 | Pune   | Sports      | Football     | Cash         |        2 |  1800.00 |    4.0 | 2026-01-17 |
+|       9 | Neha          | Female |   22 | Bhopal | Beauty      | Face Wash    | UPI          |        4 |   800.00 |    4.6 | 2026-01-18 |
+|      10 | Vikas         | Male   |   31 | Jaipur | Electronics | Tablet       | Card         |        1 | 18000.00 |    4.5 | 2026-01-19 |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SALES LIMIT 5 OFFSET 10;
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name  | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+|      11 | Pooja         | Female |   27 | Pune   | Fashion     | Kurti         | UPI          |        2 |  1700.00 |    4.3 | 2026-01-20 |
+|      12 | Arjun         | Male   |   30 | Delhi  | Electronics | Smart Watch   | Card         |        1 |  9000.00 |    4.6 | 2026-01-21 |
+|      13 | Anjali        | Female |   26 | Mumbai | Beauty      | Perfume       | Cash         |        1 |  3500.00 |    4.2 | 2026-01-22 |
+|      14 | Yash          | Male   |   25 | Indore | Sports      | Badminton Kit | UPI          |        1 |  2800.00 |    4.4 | 2026-01-23 |
+|      15 | Meera         | Female |   28 | Pune   | Electronics | Camera        | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SALES LIMIT 5 OFFSET 15;
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+---------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name | payment_mode | quantity | price   | rating | order_date |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+---------+--------+------------+
+|      16 | Sahil         | Male   |   24 | Bhopal | Fashion     | Jacket       | UPI          |        1 | 3200.00 |    4.1 | 2026-01-25 |
+|      17 | Nikita        | Female |   29 | Jaipur | Beauty      | Moisturizer  | Card         |        2 | 1200.00 |    4.7 | 2026-01-26 |
+|      18 | Harsh         | Male   |   32 | Delhi  | Sports      | Gym Gloves   | Cash         |        3 |  900.00 |    4.0 | 2026-01-27 |
+|      19 | Simran        | Female |   23 | Mumbai | Electronics | Earbuds      | UPI          |        2 | 2500.00 |    4.5 | 2026-01-28 |
+|      20 | Deepak        | Male   |   27 | Pune   | Fashion     | T-Shirt      | Card         |        3 | 1800.00 |    4.2 | 2026-01-29 |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+---------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT *FROM SALES ORDER BY ORDER_DATE DESC LIMIT 3;
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+---------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name | payment_mode | quantity | price   | rating | order_date |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+---------+--------+------------+
+|      20 | Deepak        | Male   |   27 | Pune   | Fashion     | T-Shirt      | Card         |        3 | 1800.00 |    4.2 | 2026-01-29 |
+|      19 | Simran        | Female |   23 | Mumbai | Electronics | Earbuds      | UPI          |        2 | 2500.00 |    4.5 | 2026-01-28 |
+|      18 | Harsh         | Male   |   32 | Delhi  | Sports      | Gym Gloves   | Cash         |        3 |  900.00 |    4.0 | 2026-01-27 |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+---------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(*) AS total_orders FROM sales;
++--------------+
+| total_orders |
++--------------+
+|           20 |
++--------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT SUM(price * quantity) AS total_revenue FROM sales;
++---------------+
+| total_revenue |
++---------------+
+|     209900.00 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT AVG(price * quantity) AS avg_sales_amount FROM sales;
++------------------+
+| avg_sales_amount |
++------------------+
+|     10495.000000 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MAX(price * quantity) AS max_sales_amount FROM sales;
++------------------+
+| max_sales_amount |
++------------------+
+|         55000.00 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MIN(price * quantity) AS min_sales_amount FROM sales;
++------------------+
+| min_sales_amount |
++------------------+
+|          2200.00 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MAX(rating) AS highest_rating FROM sales;
++----------------+
+| highest_rating |
++----------------+
+|            4.9 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MIN(rating) AS lowest_rating FROM sales;
++---------------+
+| lowest_rating |
++---------------+
+|           4.0 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT ROUND(AVG(rating), 2) AS avg_rating FROM sales;
++------------+
+| avg_rating |
++------------+
+|       4.40 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SUM(quantity) AS total_qty_sold FROM sales;
++----------------+
+| total_qty_sold |
++----------------+
+|             35 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT AVG(quantity) AS avg_qty_sold FROM sales;
++--------------+
+| avg_qty_sold |
++--------------+
+|       1.7500 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MAX(quantity) AS max_qty_sold FROM sales;
++--------------+
+| max_qty_sold |
++--------------+
+|            4 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MIN(quantity) AS min_qty_sold FROM sales;
++--------------+
+| min_qty_sold |
++--------------+
+|            1 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(*) AS electronics_count FROM sales WHERE category = 'Electronics';
++-------------------+
+| electronics_count |
++-------------------+
+|                 7 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(*) AS fashion_count FROM sales WHERE category = 'Fashion';
++---------------+
+| fashion_count |
++---------------+
+|             5 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(*) AS sports_count FROM sales WHERE category = 'Sports';
++--------------+
+| sports_count |
++--------------+
+|            4 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT customer_name, UPPER(customer_name) AS name_upper FROM sales;
++---------------+------------+
+| customer_name | name_upper |
++---------------+------------+
+| Akash         | AKASH      |
+| Rahul         | RAHUL      |
+| Sneha         | SNEHA      |
+| Priya         | PRIYA      |
+| Aman          | AMAN       |
+| Rohit         | ROHIT      |
+| Riya          | RIYA       |
+| Karan         | KARAN      |
+| Neha          | NEHA       |
+| Vikas         | VIKAS      |
+| Pooja         | POOJA      |
+| Arjun         | ARJUN      |
+| Anjali        | ANJALI     |
+| Yash          | YASH       |
+| Meera         | MEERA      |
+| Sahil         | SAHIL      |
+| Nikita        | NIKITA     |
+| Harsh         | HARSH      |
+| Simran        | SIMRAN     |
+| Deepak        | DEEPAK     |
++---------------+------------+
+20 rows in set (0.01 sec)
+
+mysql> SELECT customer_name, LOWER(customer_name) AS name_lower FROM sales;
++---------------+------------+
+| customer_name | name_lower |
++---------------+------------+
+| Akash         | akash      |
+| Rahul         | rahul      |
+| Sneha         | sneha      |
+| Priya         | priya      |
+| Aman          | aman       |
+| Rohit         | rohit      |
+| Riya          | riya       |
+| Karan         | karan      |
+| Neha          | neha       |
+| Vikas         | vikas      |
+| Pooja         | pooja      |
+| Arjun         | arjun      |
+| Anjali        | anjali     |
+| Yash          | yash       |
+| Meera         | meera      |
+| Sahil         | sahil      |
+| Nikita        | nikita     |
+| Harsh         | harsh      |
+| Simran        | simran     |
+| Deepak        | deepak     |
++---------------+------------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT customer_name, LENGTH(customer_name) AS name_length FROM sales;
++---------------+-------------+
+| customer_name | name_length |
++---------------+-------------+
+| Akash         |           5 |
+| Rahul         |           5 |
+| Sneha         |           5 |
+| Priya         |           5 |
+| Aman          |           4 |
+| Rohit         |           5 |
+| Riya          |           4 |
+| Karan         |           5 |
+| Neha          |           4 |
+| Vikas         |           5 |
+| Pooja         |           5 |
+| Arjun         |           5 |
+| Anjali        |           6 |
+| Yash          |           4 |
+| Meera         |           5 |
+| Sahil         |           5 |
+| Nikita        |           6 |
+| Harsh         |           5 |
+| Simran        |           6 |
+| Deepak        |           6 |
++---------------+-------------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT city, LENGTH(city) AS city_length FROM sales;
++--------+-------------+
+| city   | city_length |
++--------+-------------+
+| Pune   |           4 |
+| Mumbai |           6 |
+| Delhi  |           5 |
+| Pune   |           4 |
+| Indore |           6 |
+| Mumbai |           6 |
+| Delhi  |           5 |
+| Pune   |           4 |
+| Bhopal |           6 |
+| Jaipur |           6 |
+| Pune   |           4 |
+| Delhi  |           5 |
+| Mumbai |           6 |
+| Indore |           6 |
+| Pune   |           4 |
+| Bhopal |           6 |
+| Jaipur |           6 |
+| Delhi  |           5 |
+| Mumbai |           6 |
+| Pune   |           4 |
++--------+-------------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT CONCAT(customer_name, ' - ', city) AS name_city FROM sales;
++-----------------+
+| name_city       |
++-----------------+
+| Akash - Pune    |
+| Rahul - Mumbai  |
+| Sneha - Delhi   |
+| Priya - Pune    |
+| Aman - Indore   |
+| Rohit - Mumbai  |
+| Riya - Delhi    |
+| Karan - Pune    |
+| Neha - Bhopal   |
+| Vikas - Jaipur  |
+| Pooja - Pune    |
+| Arjun - Delhi   |
+| Anjali - Mumbai |
+| Yash - Indore   |
+| Meera - Pune    |
+| Sahil - Bhopal  |
+| Nikita - Jaipur |
+| Harsh - Delhi   |
+| Simran - Mumbai |
+| Deepak - Pune   |
++-----------------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT customer_name, REPLACE(customer_name, 'a', '@') AS name_replaced FROM sales;
++---------------+---------------+
+| customer_name | name_replaced |
++---------------+---------------+
+| Akash         | Ak@sh         |
+| Rahul         | R@hul         |
+| Sneha         | Sneh@         |
+| Priya         | Priy@         |
+| Aman          | Am@n          |
+| Rohit         | Rohit         |
+| Riya          | Riy@          |
+| Karan         | K@r@n         |
+| Neha          | Neh@          |
+| Vikas         | Vik@s         |
+| Pooja         | Pooj@         |
+| Arjun         | Arjun         |
+| Anjali        | Anj@li        |
+| Yash          | Y@sh          |
+| Meera         | Meer@         |
+| Sahil         | S@hil         |
+| Nikita        | Nikit@        |
+| Harsh         | H@rsh         |
+| Simran        | Simr@n        |
+| Deepak        | Deep@k        |
++---------------+---------------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT customer_name, REPLACE(customer_name, 'e', '*') AS name_replaced FROM sales;
++---------------+---------------+
+| customer_name | name_replaced |
++---------------+---------------+
+| Akash         | Akash         |
+| Rahul         | Rahul         |
+| Sneha         | Sn*ha         |
+| Priya         | Priya         |
+| Aman          | Aman          |
+| Rohit         | Rohit         |
+| Riya          | Riya          |
+| Karan         | Karan         |
+| Neha          | N*ha          |
+| Vikas         | Vikas         |
+| Pooja         | Pooja         |
+| Arjun         | Arjun         |
+| Anjali        | Anjali        |
+| Yash          | Yash          |
+| Meera         | M**ra         |
+| Sahil         | Sahil         |
+| Nikita        | Nikita        |
+| Harsh         | Harsh         |
+| Simran        | Simran        |
+| Deepak        | D**pak        |
++---------------+---------------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT TRIM('  Data Analyst  ') AS trimmed_text;
++--------------+
+| trimmed_text |
++--------------+
+| Data Analyst |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT customer_name, LEFT(customer_name, 3) AS first_3_letters FROM sales;
++---------------+-----------------+
+| customer_name | first_3_letters |
++---------------+-----------------+
+| Akash         | Aka             |
+| Rahul         | Rah             |
+| Sneha         | Sne             |
+| Priya         | Pri             |
+| Aman          | Ama             |
+| Rohit         | Roh             |
+| Riya          | Riy             |
+| Karan         | Kar             |
+| Neha          | Neh             |
+| Vikas         | Vik             |
+| Pooja         | Poo             |
+| Arjun         | Arj             |
+| Anjali        | Anj             |
+| Yash          | Yas             |
+| Meera         | Mee             |
+| Sahil         | Sah             |
+| Nikita        | Nik             |
+| Harsh         | Har             |
+| Simran        | Sim             |
+| Deepak        | Dee             |
++---------------+-----------------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT city, RIGHT(city, 2) AS last_2_letters FROM sales;
++--------+----------------+
+| city   | last_2_letters |
++--------+----------------+
+| Pune   | ne             |
+| Mumbai | ai             |
+| Delhi  | hi             |
+| Pune   | ne             |
+| Indore | re             |
+| Mumbai | ai             |
+| Delhi  | hi             |
+| Pune   | ne             |
+| Bhopal | al             |
+| Jaipur | ur             |
+| Pune   | ne             |
+| Delhi  | hi             |
+| Mumbai | ai             |
+| Indore | re             |
+| Pune   | ne             |
+| Bhopal | al             |
+| Jaipur | ur             |
+| Delhi  | hi             |
+| Mumbai | ai             |
+| Pune   | ne             |
++--------+----------------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT product_name, price, ROUND(price) AS rounded_price FROM sales;
++---------------+----------+---------------+
+| product_name  | price    | rounded_price |
++---------------+----------+---------------+
+| Laptop        | 55000.00 |         55000 |
+| Shirt         |  2500.00 |          2500 |
+| Lipstick      |  1500.00 |          1500 |
+| Mobile        | 25000.00 |         25000 |
+| Cricket Bat   |  3000.00 |          3000 |
+| Headphones    |  4000.00 |          4000 |
+| Jeans         |  2200.00 |          2200 |
+| Football      |  1800.00 |          1800 |
+| Face Wash     |   800.00 |           800 |
+| Tablet        | 18000.00 |         18000 |
+| Kurti         |  1700.00 |          1700 |
+| Smart Watch   |  9000.00 |          9000 |
+| Perfume       |  3500.00 |          3500 |
+| Badminton Kit |  2800.00 |          2800 |
+| Camera        | 45000.00 |         45000 |
+| Jacket        |  3200.00 |          3200 |
+| Moisturizer   |  1200.00 |          1200 |
+| Gym Gloves    |   900.00 |           900 |
+| Earbuds       |  2500.00 |          2500 |
+| T-Shirt       |  1800.00 |          1800 |
++---------------+----------+---------------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT product_name, price, CEIL(price) AS ceil_price FROM sales;
++---------------+----------+------------+
+| product_name  | price    | ceil_price |
++---------------+----------+------------+
+| Laptop        | 55000.00 |      55000 |
+| Shirt         |  2500.00 |       2500 |
+| Lipstick      |  1500.00 |       1500 |
+| Mobile        | 25000.00 |      25000 |
+| Cricket Bat   |  3000.00 |       3000 |
+| Headphones    |  4000.00 |       4000 |
+| Jeans         |  2200.00 |       2200 |
+| Football      |  1800.00 |       1800 |
+| Face Wash     |   800.00 |        800 |
+| Tablet        | 18000.00 |      18000 |
+| Kurti         |  1700.00 |       1700 |
+| Smart Watch   |  9000.00 |       9000 |
+| Perfume       |  3500.00 |       3500 |
+| Badminton Kit |  2800.00 |       2800 |
+| Camera        | 45000.00 |      45000 |
+| Jacket        |  3200.00 |       3200 |
+| Moisturizer   |  1200.00 |       1200 |
+| Gym Gloves    |   900.00 |        900 |
+| Earbuds       |  2500.00 |       2500 |
+| T-Shirt       |  1800.00 |       1800 |
++---------------+----------+------------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT product_name, price, FLOOR(price) AS floor_price FROM sales;
++---------------+----------+-------------+
+| product_name  | price    | floor_price |
++---------------+----------+-------------+
+| Laptop        | 55000.00 |       55000 |
+| Shirt         |  2500.00 |        2500 |
+| Lipstick      |  1500.00 |        1500 |
+| Mobile        | 25000.00 |       25000 |
+| Cricket Bat   |  3000.00 |        3000 |
+| Headphones    |  4000.00 |        4000 |
+| Jeans         |  2200.00 |        2200 |
+| Football      |  1800.00 |        1800 |
+| Face Wash     |   800.00 |         800 |
+| Tablet        | 18000.00 |       18000 |
+| Kurti         |  1700.00 |        1700 |
+| Smart Watch   |  9000.00 |        9000 |
+| Perfume       |  3500.00 |        3500 |
+| Badminton Kit |  2800.00 |        2800 |
+| Camera        | 45000.00 |       45000 |
+| Jacket        |  3200.00 |        3200 |
+| Moisturizer   |  1200.00 |        1200 |
+| Gym Gloves    |   900.00 |         900 |
+| Earbuds       |  2500.00 |        2500 |
+| T-Shirt       |  1800.00 |        1800 |
++---------------+----------+-------------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT order_date, YEAR(order_date) AS order_year FROM sales;
++------------+------------+
+| order_date | order_year |
++------------+------------+
+| 2026-01-10 |       2026 |
+| 2026-01-11 |       2026 |
+| 2026-01-12 |       2026 |
+| 2026-01-13 |       2026 |
+| 2026-01-14 |       2026 |
+| 2026-01-15 |       2026 |
+| 2026-01-16 |       2026 |
+| 2026-01-17 |       2026 |
+| 2026-01-18 |       2026 |
+| 2026-01-19 |       2026 |
+| 2026-01-20 |       2026 |
+| 2026-01-21 |       2026 |
+| 2026-01-22 |       2026 |
+| 2026-01-23 |       2026 |
+| 2026-01-24 |       2026 |
+| 2026-01-25 |       2026 |
+| 2026-01-26 |       2026 |
+| 2026-01-27 |       2026 |
+| 2026-01-28 |       2026 |
+| 2026-01-29 |       2026 |
++------------+------------+
+20 rows in set (0.01 sec)
+
+mysql> SELECT order_date, MONTH(order_date) AS order_month FROM sales;
++------------+-------------+
+| order_date | order_month |
++------------+-------------+
+| 2026-01-10 |           1 |
+| 2026-01-11 |           1 |
+| 2026-01-12 |           1 |
+| 2026-01-13 |           1 |
+| 2026-01-14 |           1 |
+| 2026-01-15 |           1 |
+| 2026-01-16 |           1 |
+| 2026-01-17 |           1 |
+| 2026-01-18 |           1 |
+| 2026-01-19 |           1 |
+| 2026-01-20 |           1 |
+| 2026-01-21 |           1 |
+| 2026-01-22 |           1 |
+| 2026-01-23 |           1 |
+| 2026-01-24 |           1 |
+| 2026-01-25 |           1 |
+| 2026-01-26 |           1 |
+| 2026-01-27 |           1 |
+| 2026-01-28 |           1 |
+| 2026-01-29 |           1 |
++------------+-------------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT order_date, DAY(order_date) AS order_day FROM sales;
++------------+-----------+
+| order_date | order_day |
++------------+-----------+
+| 2026-01-10 |        10 |
+| 2026-01-11 |        11 |
+| 2026-01-12 |        12 |
+| 2026-01-13 |        13 |
+| 2026-01-14 |        14 |
+| 2026-01-15 |        15 |
+| 2026-01-16 |        16 |
+| 2026-01-17 |        17 |
+| 2026-01-18 |        18 |
+| 2026-01-19 |        19 |
+| 2026-01-20 |        20 |
+| 2026-01-21 |        21 |
+| 2026-01-22 |        22 |
+| 2026-01-23 |        23 |
+| 2026-01-24 |        24 |
+| 2026-01-25 |        25 |
+| 2026-01-26 |        26 |
+| 2026-01-27 |        27 |
+| 2026-01-28 |        28 |
+| 2026-01-29 |        29 |
++------------+-----------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT * FROM sales WHERE MONTH(order_date) = 1 AND YEAR(order_date) = 2026;
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name  | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+|       1 | Akash         | Male   |   24 | Pune   | Electronics | Laptop        | UPI          |        1 | 55000.00 |    4.8 | 2026-01-10 |
+|       2 | Rahul         | Male   |   26 | Mumbai | Fashion     | Shirt         | Card         |        2 |  2500.00 |    4.2 | 2026-01-11 |
+|       3 | Sneha         | Female |   23 | Delhi  | Beauty      | Lipstick      | UPI          |        3 |  1500.00 |    4.5 | 2026-01-12 |
+|       4 | Priya         | Female |   25 | Pune   | Electronics | Mobile        | Card         |        1 | 25000.00 |    4.7 | 2026-01-13 |
+|       5 | Aman          | Male   |   28 | Indore | Sports      | Cricket Bat   | Cash         |        1 |  3000.00 |    4.1 | 2026-01-14 |
+|       6 | Rohit         | Male   |   27 | Mumbai | Electronics | Headphones    | UPI          |        2 |  4000.00 |    4.3 | 2026-01-15 |
+|       7 | Riya          | Female |   24 | Delhi  | Fashion     | Jeans         | Card         |        1 |  2200.00 |    4.4 | 2026-01-16 |
+|       8 | Karan         | Male   |   29 | Pune   | Sports      | Football      | Cash         |        2 |  1800.00 |    4.0 | 2026-01-17 |
+|       9 | Neha          | Female |   22 | Bhopal | Beauty      | Face Wash     | UPI          |        4 |   800.00 |    4.6 | 2026-01-18 |
+|      10 | Vikas         | Male   |   31 | Jaipur | Electronics | Tablet        | Card         |        1 | 18000.00 |    4.5 | 2026-01-19 |
+|      11 | Pooja         | Female |   27 | Pune   | Fashion     | Kurti         | UPI          |        2 |  1700.00 |    4.3 | 2026-01-20 |
+|      12 | Arjun         | Male   |   30 | Delhi  | Electronics | Smart Watch   | Card         |        1 |  9000.00 |    4.6 | 2026-01-21 |
+|      13 | Anjali        | Female |   26 | Mumbai | Beauty      | Perfume       | Cash         |        1 |  3500.00 |    4.2 | 2026-01-22 |
+|      14 | Yash          | Male   |   25 | Indore | Sports      | Badminton Kit | UPI          |        1 |  2800.00 |    4.4 | 2026-01-23 |
+|      15 | Meera         | Female |   28 | Pune   | Electronics | Camera        | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
+|      16 | Sahil         | Male   |   24 | Bhopal | Fashion     | Jacket        | UPI          |        1 |  3200.00 |    4.1 | 2026-01-25 |
+|      17 | Nikita        | Female |   29 | Jaipur | Beauty      | Moisturizer   | Card         |        2 |  1200.00 |    4.7 | 2026-01-26 |
+|      18 | Harsh         | Male   |   32 | Delhi  | Sports      | Gym Gloves    | Cash         |        3 |   900.00 |    4.0 | 2026-01-27 |
+|      19 | Simran        | Female |   23 | Mumbai | Electronics | Earbuds       | UPI          |        2 |  2500.00 |    4.5 | 2026-01-28 |
+|      20 | Deepak        | Male   |   27 | Pune   | Fashion     | T-Shirt       | Card         |        3 |  1800.00 |    4.2 | 2026-01-29 |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT order_date, DAYNAME(order_date) AS order_dayname FROM sales;
++------------+---------------+
+| order_date | order_dayname |
++------------+---------------+
+| 2026-01-10 | Saturday      |
+| 2026-01-11 | Sunday        |
+| 2026-01-12 | Monday        |
+| 2026-01-13 | Tuesday       |
+| 2026-01-14 | Wednesday     |
+| 2026-01-15 | Thursday      |
+| 2026-01-16 | Friday        |
+| 2026-01-17 | Saturday      |
+| 2026-01-18 | Sunday        |
+| 2026-01-19 | Monday        |
+| 2026-01-20 | Tuesday       |
+| 2026-01-21 | Wednesday     |
+| 2026-01-22 | Thursday      |
+| 2026-01-23 | Friday        |
+| 2026-01-24 | Saturday      |
+| 2026-01-25 | Sunday        |
+| 2026-01-26 | Monday        |
+| 2026-01-27 | Tuesday       |
+| 2026-01-28 | Wednesday     |
+| 2026-01-29 | Thursday      |
++------------+---------------+
+20 rows in set (0.01 sec)
+
+mysql> SELECT order_date, YEAR(order_date) AS order_year FROM sales;
++------------+------------+
+| order_date | order_year |
++------------+------------+
+| 2026-01-10 |       2026 |
+| 2026-01-11 |       2026 |
+| 2026-01-12 |       2026 |
+| 2026-01-13 |       2026 |
+| 2026-01-14 |       2026 |
+| 2026-01-15 |       2026 |
+| 2026-01-16 |       2026 |
+| 2026-01-17 |       2026 |
+| 2026-01-18 |       2026 |
+| 2026-01-19 |       2026 |
+| 2026-01-20 |       2026 |
+| 2026-01-21 |       2026 |
+| 2026-01-22 |       2026 |
+| 2026-01-23 |       2026 |
+| 2026-01-24 |       2026 |
+| 2026-01-25 |       2026 |
+| 2026-01-26 |       2026 |
+| 2026-01-27 |       2026 |
+| 2026-01-28 |       2026 |
+| 2026-01-29 |       2026 |
++------------+------------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT order_date, MONTH(order_date) AS order_month FROM sales;
++------------+-------------+
+| order_date | order_month |
++------------+-------------+
+| 2026-01-10 |           1 |
+| 2026-01-11 |           1 |
+| 2026-01-12 |           1 |
+| 2026-01-13 |           1 |
+| 2026-01-14 |           1 |
+| 2026-01-15 |           1 |
+| 2026-01-16 |           1 |
+| 2026-01-17 |           1 |
+| 2026-01-18 |           1 |
+| 2026-01-19 |           1 |
+| 2026-01-20 |           1 |
+| 2026-01-21 |           1 |
+| 2026-01-22 |           1 |
+| 2026-01-23 |           1 |
+| 2026-01-24 |           1 |
+| 2026-01-25 |           1 |
+| 2026-01-26 |           1 |
+| 2026-01-27 |           1 |
+| 2026-01-28 |           1 |
+| 2026-01-29 |           1 |
++------------+-------------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT order_date, DAY(order_date) AS order_day FROM sales;
++------------+-----------+
+| order_date | order_day |
++------------+-----------+
+| 2026-01-10 |        10 |
+| 2026-01-11 |        11 |
+| 2026-01-12 |        12 |
+| 2026-01-13 |        13 |
+| 2026-01-14 |        14 |
+| 2026-01-15 |        15 |
+| 2026-01-16 |        16 |
+| 2026-01-17 |        17 |
+| 2026-01-18 |        18 |
+| 2026-01-19 |        19 |
+| 2026-01-20 |        20 |
+| 2026-01-21 |        21 |
+| 2026-01-22 |        22 |
+| 2026-01-23 |        23 |
+| 2026-01-24 |        24 |
+| 2026-01-25 |        25 |
+| 2026-01-26 |        26 |
+| 2026-01-27 |        27 |
+| 2026-01-28 |        28 |
+| 2026-01-29 |        29 |
++------------+-----------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT * FROM sales WHERE MONTH(order_date) = 1;
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name  | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+|       1 | Akash         | Male   |   24 | Pune   | Electronics | Laptop        | UPI          |        1 | 55000.00 |    4.8 | 2026-01-10 |
+|       2 | Rahul         | Male   |   26 | Mumbai | Fashion     | Shirt         | Card         |        2 |  2500.00 |    4.2 | 2026-01-11 |
+|       3 | Sneha         | Female |   23 | Delhi  | Beauty      | Lipstick      | UPI          |        3 |  1500.00 |    4.5 | 2026-01-12 |
+|       4 | Priya         | Female |   25 | Pune   | Electronics | Mobile        | Card         |        1 | 25000.00 |    4.7 | 2026-01-13 |
+|       5 | Aman          | Male   |   28 | Indore | Sports      | Cricket Bat   | Cash         |        1 |  3000.00 |    4.1 | 2026-01-14 |
+|       6 | Rohit         | Male   |   27 | Mumbai | Electronics | Headphones    | UPI          |        2 |  4000.00 |    4.3 | 2026-01-15 |
+|       7 | Riya          | Female |   24 | Delhi  | Fashion     | Jeans         | Card         |        1 |  2200.00 |    4.4 | 2026-01-16 |
+|       8 | Karan         | Male   |   29 | Pune   | Sports      | Football      | Cash         |        2 |  1800.00 |    4.0 | 2026-01-17 |
+|       9 | Neha          | Female |   22 | Bhopal | Beauty      | Face Wash     | UPI          |        4 |   800.00 |    4.6 | 2026-01-18 |
+|      10 | Vikas         | Male   |   31 | Jaipur | Electronics | Tablet        | Card         |        1 | 18000.00 |    4.5 | 2026-01-19 |
+|      11 | Pooja         | Female |   27 | Pune   | Fashion     | Kurti         | UPI          |        2 |  1700.00 |    4.3 | 2026-01-20 |
+|      12 | Arjun         | Male   |   30 | Delhi  | Electronics | Smart Watch   | Card         |        1 |  9000.00 |    4.6 | 2026-01-21 |
+|      13 | Anjali        | Female |   26 | Mumbai | Beauty      | Perfume       | Cash         |        1 |  3500.00 |    4.2 | 2026-01-22 |
+|      14 | Yash          | Male   |   25 | Indore | Sports      | Badminton Kit | UPI          |        1 |  2800.00 |    4.4 | 2026-01-23 |
+|      15 | Meera         | Female |   28 | Pune   | Electronics | Camera        | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
+|      16 | Sahil         | Male   |   24 | Bhopal | Fashion     | Jacket        | UPI          |        1 |  3200.00 |    4.1 | 2026-01-25 |
+|      17 | Nikita        | Female |   29 | Jaipur | Beauty      | Moisturizer   | Card         |        2 |  1200.00 |    4.7 | 2026-01-26 |
+|      18 | Harsh         | Male   |   32 | Delhi  | Sports      | Gym Gloves    | Cash         |        3 |   900.00 |    4.0 | 2026-01-27 |
+|      19 | Simran        | Female |   23 | Mumbai | Electronics | Earbuds       | UPI          |        2 |  2500.00 |    4.5 | 2026-01-28 |
+|      20 | Deepak        | Male   |   27 | Pune   | Fashion     | T-Shirt       | Card         |        3 |  1800.00 |    4.2 | 2026-01-29 |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT * FROM sales WHERE order_date < '2026-01-20';
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+|       1 | Akash         | Male   |   24 | Pune   | Electronics | Laptop       | UPI          |        1 | 55000.00 |    4.8 | 2026-01-10 |
+|       2 | Rahul         | Male   |   26 | Mumbai | Fashion     | Shirt        | Card         |        2 |  2500.00 |    4.2 | 2026-01-11 |
+|       3 | Sneha         | Female |   23 | Delhi  | Beauty      | Lipstick     | UPI          |        3 |  1500.00 |    4.5 | 2026-01-12 |
+|       4 | Priya         | Female |   25 | Pune   | Electronics | Mobile       | Card         |        1 | 25000.00 |    4.7 | 2026-01-13 |
+|       5 | Aman          | Male   |   28 | Indore | Sports      | Cricket Bat  | Cash         |        1 |  3000.00 |    4.1 | 2026-01-14 |
+|       6 | Rohit         | Male   |   27 | Mumbai | Electronics | Headphones   | UPI          |        2 |  4000.00 |    4.3 | 2026-01-15 |
+|       7 | Riya          | Female |   24 | Delhi  | Fashion     | Jeans        | Card         |        1 |  2200.00 |    4.4 | 2026-01-16 |
+|       8 | Karan         | Male   |   29 | Pune   | Sports      | Football     | Cash         |        2 |  1800.00 |    4.0 | 2026-01-17 |
+|       9 | Neha          | Female |   22 | Bhopal | Beauty      | Face Wash    | UPI          |        4 |   800.00 |    4.6 | 2026-01-18 |
+|      10 | Vikas         | Male   |   31 | Jaipur | Electronics | Tablet       | Card         |        1 | 18000.00 |    4.5 | 2026-01-19 |
++---------+---------------+--------+------+--------+-------------+--------------+--------------+----------+----------+--------+------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT * FROM sales WHERE order_date > '2026-01-20';
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+| sale_id | customer_name | gender | age  | city   | category    | product_name  | payment_mode | quantity | price    | rating | order_date |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+|      12 | Arjun         | Male   |   30 | Delhi  | Electronics | Smart Watch   | Card         |        1 |  9000.00 |    4.6 | 2026-01-21 |
+|      13 | Anjali        | Female |   26 | Mumbai | Beauty      | Perfume       | Cash         |        1 |  3500.00 |    4.2 | 2026-01-22 |
+|      14 | Yash          | Male   |   25 | Indore | Sports      | Badminton Kit | UPI          |        1 |  2800.00 |    4.4 | 2026-01-23 |
+|      15 | Meera         | Female |   28 | Pune   | Electronics | Camera        | Card         |        1 | 45000.00 |    4.9 | 2026-01-24 |
+|      16 | Sahil         | Male   |   24 | Bhopal | Fashion     | Jacket        | UPI          |        1 |  3200.00 |    4.1 | 2026-01-25 |
+|      17 | Nikita        | Female |   29 | Jaipur | Beauty      | Moisturizer   | Card         |        2 |  1200.00 |    4.7 | 2026-01-26 |
+|      18 | Harsh         | Male   |   32 | Delhi  | Sports      | Gym Gloves    | Cash         |        3 |   900.00 |    4.0 | 2026-01-27 |
+|      19 | Simran        | Female |   23 | Mumbai | Electronics | Earbuds       | UPI          |        2 |  2500.00 |    4.5 | 2026-01-28 |
+|      20 | Deepak        | Male   |   27 | Pune   | Fashion     | T-Shirt       | Card         |        3 |  1800.00 |    4.2 | 2026-01-29 |
++---------+---------------+--------+------+--------+-------------+---------------+--------------+----------+----------+--------+------------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT MAX(order_date) AS latest_order_date FROM sales;
++-------------------+
+| latest_order_date |
++-------------------+
+| 2026-01-29        |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> UPDATE sales SET city = 'Nagpur' WHERE customer_name = 'Akash';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE sales SET rating = 4.5 WHERE customer_name = 'Rahul';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE sales SET payment_mode = 'UPI' WHERE payment_mode = 'Card';
+Query OK, 8 rows affected (0.01 sec)
+Rows matched: 8  Changed: 8  Warnings: 0
+
+mysql> UPDATE sales SET price = price + 500;
+Query OK, 20 rows affected (0.01 sec)
+Rows matched: 20  Changed: 20  Warnings: 0
+
+mysql> UPDATE sales SET price = price - 100;
+Query OK, 20 rows affected (0.01 sec)
+Rows matched: 20  Changed: 20  Warnings: 0
+
+mysql> UPDATE sales SET category = 'Gadgets' WHERE category = 'Electronics';
+Query OK, 7 rows affected (0.01 sec)
+Rows matched: 7  Changed: 7  Warnings: 0
+
+mysql> UPDATE sales SET city = 'Nagpur' WHERE city = 'Pune';
+Query OK, 5 rows affected (0.01 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> UPDATE sales SET quantity = 2 WHERE product_name = 'Laptop';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE sales SET product_name = 'T-Shirt' WHERE product_name = 'Shirt';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE sales SET customer_name = 'Aakash' WHERE customer_name = 'Akash';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
